@@ -66,11 +66,11 @@ function endGame(draw)
 {
     if ( draw ) 
     {
-        winningMessageTextElement.innerText = "It's a draw chutiye!"
+        winningMessageTextElement.innerText = "It's a draw baraadar!"
     }
     else
     {
-        winningMessageTextElement.innerText = `Player with ${isPlayer_O_Turn ? "O's" : "X's"} wins bhosdiwaalon!`
+        winningMessageTextElement.innerText = `Player with ${isPlayer_O_Turn ? "O's" : "X's"} wins the cash!`
     }
 
     winningMessageElement.classList.add('show')
