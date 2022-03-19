@@ -1,0 +1,130 @@
+*, * ::after, * ::before    /* this section added later */
+{
+    box-sizing:border-box;
+}
+
+
+:root 
+{
+    --cell-size: 100px;
+    --color: #81c3fd; /* for hover */
+    --color-set: #0275d8; /* when set */
+    --l: 10px; /* line width */
+}
+
+body 
+{
+    margin: 0;
+}
+
+.board 
+{
+    width: 100vw;
+    height: 100vh;
+    display: grid; /* seems like real shit */
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto) /* tricky shit */
+}
+
+.cell 
+{
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* remove border for edges */
+/* .... */
+
+
+/* no hover effect if cell is already filled with jeero or kaata */
+.cell.x, .cell.circle {
+    cursor: not-allowed;
+}
+
+/* drawing the cross sign when hovering */
+.board.x .cell:not(.circle):not(.x):hover 
+{
+    /* space between minus sign and var(--l)/2 is important. Throws error if not there */
+    background: linear-gradient( to top right, transparent calc(50% - var(--l)/ 2), var(--color) 
+    calc(50% - var(--l)/2) calc(50% + var(--l)/2), transparent calc(50% + var(--l)/2)),
+    linear-gradient(to bottom right, transparent calc(50% - var(--l)/ 2), var(--color) calc(50% - var(--l) /2) 
+    calc(50% + var(--l)/2), transparent calc(50% + var(--l)/2));
+
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* drawing the crossing sign when clicked REAL SHIT */
+.cell:not(.circle).x 
+{
+    background: linear-gradient(to top right, transparent calc(50% - var(--l)/2), var(--color-set) 
+    calc(50% - var(--l)/2) calc(50% + var(--l)/2), transparent calc(50% + var(--l)/2)),
+    linear-gradient(to bottom right, transparent calc(50% - var(--l)/2), var(--color-set) 
+    calc(50% - var(--l)/2) calc(50% + var(--l)/2), transparent calc(50% + var(--l)/2));
+    
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* draw circle when hover */
+.board.circle .cell:not(.circle):not(.x):hover 
+{
+    background: radial-gradient(var(--color) 60%, transparent 60%);
+}
+
+/* drawing circle when clicked REAL SHIT */
+.cell:not(.x).circle 
+{
+    background: radial-gradient(var(--color-set) 60%, transparent 60%);
+}
+
+.winning-message 
+{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-set);
+    justify-content: center;
+    align-items: center;
+    color: black; /*changed later*/
+    font-size: 3rem; /*changed*/
+    font-family: 'Courier New', Courier, monospace;
+    flex-direction: column;
+}
+
+.winning-message button 
+{
+    border-radius: 10px;
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid var(--colors-set);
+    padding: .25em .5em;
+    cursor: pointer;
+}
+
+.winning-message button:hover 
+{
+    background-color: var(--color-set);
+    color: white;
+    border-color: white;
+}
+
+.winning-message.show 
+{
+    display: flex;
+}
+
